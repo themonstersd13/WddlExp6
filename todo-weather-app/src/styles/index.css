@@ -1,0 +1,194 @@
+/* Basic resets & font */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Container */
+.container {
+  max-width: 960px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #4a90e2;
+  padding: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 600;
+}
+
+.navbar a.active {
+  text-decoration: underline;
+}
+
+/* Buttons */
+.button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: #3a78c2;
+}
+
+/* To-Do List Design */
+.todo-container {
+  background: #fff;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.todo-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.todo-form input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.todo-form select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.todo-form button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.todo-list {
+  list-style: none;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fafafa;
+  margin-bottom: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.todo-item.completed {
+  background-color: #d4edda;
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+.todo-item.high-priority {
+  border-left: 5px solid #dc3545;
+}
+
+.todo-item.medium-priority {
+  border-left: 5px solid #ffc107;
+}
+
+.todo-item.low-priority {
+  border-left: 5px solid #28a745;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-deadline {
+  font-size: 14px;
+  color: #777;
+}
+
+.item-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.item-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.item-actions .complete-btn {
+  color: #28a745;
+}
+
+.item-actions .delete-btn {
+  color: #dc3545;
+}
+
+/* Dark Mode Styling */
+.dark-mode body,
+.dark-mode .todo-container {
+  background-color: #222;
+  color: #eee;
+}
+
+.dark-mode .navbar {
+  background-color: #333;
+}
+
+.dark-mode input,
+.dark-mode select,
+.dark-mode button {
+  background-color: #444;
+  color: #eee;
+  border-color: #555;
+}
+
+.dark-mode .todo-item {
+  background-color: #333;
+  border-color: #444;
+}
+
+.dark-mode .todo-item.completed {
+  background-color: #2d6a4f;
+  color: #a3d9a5;
+}
+
+.dark-mode .todo-item.high-priority {
+  border-left: 5px solid #ff6b6b;
+}
+
+.dark-mode .todo-item.medium-priority {
+  border-left: 5px solid #feca57;
+}
+
+.dark-mode .todo-item.low-priority {
+  border-left: 5px solid #1dd1a1;
+}
