@@ -11,7 +11,25 @@ import {
   Legend,
 } from 'chart.js';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+// weather icons
+import {
+  WiDaySunny,
+  WiCloud,
+  WiRain,
+  WiSnow,
+  WiThermometer,
+  WiThermometerExterior
+} from 'react-icons/wi';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const WeatherApp = () => {
   const [forecastData, setForecastData] = useState(null);
@@ -21,21 +39,15 @@ const WeatherApp = () => {
 
   const fetchWeather = async (city) => {
     try {
-      // Use the forecast API endpoint to get 5-day/3-hour forecast data.
       const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`;
       const response = await fetch(url);
       const data = await response.json();
-
-      // The forecast API returns a string "200" when successful.
-      if (data.cod !== '200') {
-        throw new Error(data.message);
-      }
-
+      if (data.cod !== '200') throw new Error(data.message);
       setForecastData(data);
       localStorage.setItem('forecastData', JSON.stringify(data));
       setError('');
     } catch (err) {
-      setError('Could not fetch weather data.');
+      setError('Could not fetch weather data. Showing last known forecast.');
       const cached = localStorage.getItem('forecastData');
       if (cached) setForecastData(JSON.parse(cached));
     }
@@ -43,7 +55,7 @@ const WeatherApp = () => {
 
   const handleSearch = () => {
     if (!location.trim()) return;
-    fetchWeather(location);
+    fetchWeather(location.trim());
   };
 
   useEffect(() => {
@@ -51,24 +63,35 @@ const WeatherApp = () => {
     if (cached) setForecastData(JSON.parse(cached));
   }, []);
 
-  // The forecast API returns data every 3 hours.
-  // To display a whole day (24 hours), we can use the first 8 entries.
-  const forecastForDay =
-    forecastData && forecastData.list ? forecastData.list.slice(0, 8) : [];
+  const current = forecastData?.list?.[0];
+  const forecastForDay = forecastData?.list?.slice(0, 8) || [];
 
-  // Prepare chart data if we have forecast data.
+  // pick an icon based on temperature
+  const getTempIcon = (temp) => {
+    if (temp >= 30) return <WiDaySunny className="weather-icon hot" />;
+    if (temp >= 20) return <WiThermometerExterior className="weather-icon warm" />;
+    if (temp >= 10) return <WiCloud className="weather-icon mild" />;
+    if (temp >= 0)  return <WiSnow className="weather-icon cool" />;
+    return <WiThermometer className="weather-icon cold" />;
+  };
+
+  // short descriptive text
+  const getDescription = (temp) => {
+    if (temp >= 30) return "It's a scorcher out there! Stay hydrated.";
+    if (temp >= 20) return "Nice and warm—perfect day to be outdoors.";
+    if (temp >= 10) return "A bit cool—grab a light jacket.";
+    if (temp >= 0)  return "Chilly—bundle up!";
+    return "Freezing cold—stay inside if you can!";
+  };
+
+  // chart data
   const chartData =
     forecastForDay.length > 0
       ? {
-          labels: forecastForDay.map((item) => {
-            // Extract hours from the forecast timestamp.
-            const date = new Date(item.dt_txt);
-            // Format to 24-hour clock (e.g., "14:00")
-            return `${date.getHours()}:00`;
-          }),
+          labels: forecastForDay.map((item) => new Date(item.dt_txt).getHours() + ':00'),
           datasets: [
             {
-              label: 'Temperature (°C)',
+              label: 'Temp (°C)',
               data: forecastForDay.map((item) => item.main.temp),
               borderColor: 'rgba(75,192,192,1)',
               backgroundColor: 'rgba(75,192,192,0.2)',
@@ -80,33 +103,39 @@ const WeatherApp = () => {
       : { labels: [], datasets: [] };
 
   return (
-    <div className="weather-container">
-      <h1>Weather App</h1>
-      <div className="search-container">
+    <div className="weather-container container">
+      <h1 className="title">🌤 Weather Forecast</h1>
+
+      <div className="search-bar">
         <input
           type="text"
-          placeholder="Enter city"
+          placeholder="Enter city name"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button className="button" onClick={handleSearch}>
+          🔍 Search
+        </button>
       </div>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
 
-      {forecastData && forecastData.list && forecastData.list.length > 0 && (
-        <>
-          <div className="current-weather">
-            {/* Display city and the latest forecast */}
+      {current && (
+        <div className="current-card">
+          <div className="current-header">
             <h2>{forecastData.city.name}</h2>
-            <p>{forecastData.list[0].weather[0].description}</p>
-            <h3>{forecastData.list[0].main.temp}°C</h3>
+            {getTempIcon(current.main.temp)}
           </div>
+          <p className="desc">{getDescription(current.main.temp)}</p>
+          <p className="temp">{current.main.temp.toFixed(1)}°C</p>
+          <p className="weather-text">{current.weather[0].description}</p>
+        </div>
+      )}
 
-          <div className="chart-container">
-            <Line data={chartData} options={{ responsive: true }} />
-          </div>
-        </>
+      {forecastForDay.length > 0 && (
+        <div className="chart-wrapper">
+          <Line data={chartData} options={{ responsive: true }} />
+        </div>
       )}
     </div>
   );

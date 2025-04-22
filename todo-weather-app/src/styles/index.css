@@ -192,3 +192,322 @@ body {
 .dark-mode .todo-item.low-priority {
   border-left: 5px solid #1dd1a1;
 }
+
+/* ---- Base & Reset ---- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+  color: #333;
+  line-height: 1.5;
+}
+
+/* ---- Utility Containers ---- */
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* ---- Title ---- */
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #2a4365;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* ---- Search Bar ---- */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #a0aec0;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.search-bar .button {
+  padding: 0 20px;
+}
+
+/* ---- Error ---- */
+.error {
+  color: #e53e3e;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* ---- Current Weather Card ---- */
+.current-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.current-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.current-header h2 {
+  font-size: 1.8rem;
+  color: #2c5282;
+}
+
+.weather-icon {
+  font-size: 2.5rem;
+}
+
+/* Temperature-based icon colors */
+.weather-icon.hot    { color: #e53e3e; }
+.weather-icon.warm   { color: #dd6b20; }
+.weather-icon.mild   { color: #3182ce; }
+.weather-icon.cool   { color: #63b3ed; }
+.weather-icon.cold   { color: #4c51bf; }
+
+.desc {
+  font-style: italic;
+  margin: 10px 0;
+  color: #4a5568;
+}
+
+.temp {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2d3748;
+}
+
+.weather-text {
+  text-transform: capitalize;
+  color: #718096;
+  margin-top: 5px;
+}
+
+/* ---- Chart ---- */
+.chart-wrapper {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+/* ---- Base & Reset ---- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom, #f0f4f8, #d9e2ec);
+  color: #102a43;
+  line-height: 1.5;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ---- Dark Mode Base ---- */
+.dark-mode body {
+  background: linear-gradient(to bottom, #1a202c, #2d3748);
+  color: #f0f4f8;
+}
+
+/* ---- Container ---- */
+.todo-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark-mode .todo-container {
+  background: #2d3748;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* ---- Header ---- */
+.todo-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #334e68;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.dark-mode .todo-container h1 {
+  color: #f0f4f8;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+}
+
+/* ---- Dark Mode Toggle ---- */
+.toggle-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.toggle-container .button {
+  background: #4a90e2;
+  color: #fff;
+}
+
+.dark-mode .toggle-container .button {
+  background: #718096;
+  color: #f0f4f8;
+}
+
+/* ---- Buttons ---- */
+.button {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background: #3a78c2;
+  transform: translateY(-2px);
+}
+
+.dark-mode .button:hover {
+  background: #5a6670;
+}
+
+/* ---- Form ---- */
+.todo-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.todo-form input[type="text"],
+.todo-form input[type="datetime-local"] {
+  flex: 1 1 200px;
+  padding: 10px;
+  border: 2px solid #bcccdc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.todo-form input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.dark-mode .todo-form input {
+  background: #4a5568;
+  color: #e2e8f0;
+  border-color: #2c3e50;
+}
+
+/* ---- Task List ---- */
+.todo-list {
+  list-style: none;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: #f0f4f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark-mode .todo-item {
+  background: #4a5568;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.todo-item.completed {
+  opacity: 0.7;
+  text-decoration: line-through;
+}
+
+/* ---- Item Info & Deadline ---- */
+.item-info {
+  flex: 1;
+}
+
+.item-info strong {
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 4px;
+  color: #102a43;
+}
+
+.dark-mode .item-info strong {
+  color: #f0f4f8;
+}
+
+.item-deadline {
+  font-size: 0.9rem;
+  color: #486581;
+}
+
+.dark-mode .item-deadline {
+  color: #cbd5e0;
+}
+
+/* ---- Item Actions ---- */
+.item-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.item-actions .button {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+/* ---- Editing Mode ---- */
+.item-edit {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.item-edit input {
+  flex: 1;
+}
+
+/* ---- Dark Mode Specific ---- */
+.dark-mode .todo-container,
+.dark-mode .todo-item,
+.dark-mode .todo-form input,
+.dark-mode .button {
+  transition: background 0.3s ease, color 0.3s ease;
+}
