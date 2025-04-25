@@ -35,7 +35,7 @@ const WeatherApp = () => {
   const [forecastData, setForecastData] = useState(null);
   const [location, setLocation] = useState('');
   const [error, setError] = useState('');
-  const API_KEY = 'd1845658f92b31c64bd94f06f7188c9c';
+  const API_KEY = 'ff';
 
   const fetchWeather = async (city) => {
     try {
